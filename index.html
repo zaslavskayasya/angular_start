@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html ng-app="youtube">
+<head>
+   <meta charset="utf-8" >
+   <meta name="viewport" content="width=device-width, initial-scale=1.0/">
+    <title>lesson2</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="main.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+    <script src="app.js"></script>
+</head>
+<body>
+<style>
+    .active {
+        background: red;
+    }
+</style>
+<div ng-controller="LastVideosControllers as last">
+<div>
+    <button ng-class="{'active':last.tab == 1}" ng-click="last.selectTab(1)">Last</button>
+    <button ng-class="{'active':last.tab == 2}" ng-click="last.selectTab(2)" >Fav</button>
+
+</div>
+
+
+    <div ng-if="last.tab==1"  ng-repeat="video in last.videos | orderBy: 'views'">
+        <img ng-src="{{ video.image}}"></img>
+
+        <i ng-show="video.e">E</i>
+        <strong> {{ video.views | number}}</strong>
+        <p> {{ video.descript | limitTo:10 | uppercase}}</p>
+        <button ng-hide="video.isF" class="btn ">Add to favorit</button>
+    </div>
+    <div  ng-show="last.tab==2" ng-repeat="video in last.favorites| orderBy: 'views'"    >
+        <h2>{{ video.title}}</h2>
+        <i ng-show="video.e">E</i>
+        <strong> {{ video.views | number}}</strong>
+        <p> {{ video.descript | limitTo:10 | uppercase}}</p>
+        <button ng-show="video.isF" class="btn ">remove</button>
+    </div>
+</div>
+
+
+
+
+
+
+</body>
+</html>
