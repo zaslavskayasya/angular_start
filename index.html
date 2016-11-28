@@ -6,42 +6,66 @@
     <title>lesson2</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Slabo+27px" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="main.css">
 
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
     <script src="app.js"></script>
 </head>
 <body>
-<style>
-    .active {
-        background: red;
-    }
-</style>
-<div ng-controller="LastVideosControllers as last">
-<div>
-    <button ng-class="{'active':last.tab == 1}" ng-click="last.selectTab(1)">Last</button>
-    <button ng-class="{'active':last.tab == 2}" ng-click="last.selectTab(2)" >Fav</button>
 
+
+<div class="wrap">
+    <div class="container container-fluid">
+
+    <div ng-controller="LastVideosControllers as last">
+
+            <h1 class="h1 text-center">My Personal YOUtube </h1>
+        <div class="underline">
+
+        </div>
+
+
+        <div class=" row text-center">
+            <div class="col-md-4 col-md-offset-2">
+                <button class="btn btn-lg" ng-class="{'btn-warning':last.tab == 1}" ng-click="last.selectTab(1)">Новое</button>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-lg" ng-class="{'btn-warning':last.tab == 2}" ng-click="last.selectTab(2)" >Избранное</button>
+            </div>
+        </div>
+
+
+        <div class="row">
+                <div  class="col-md-6 block inline-block" ng-if="last.tab==1"  ng-repeat="video in last.videos | orderBy: 'views'">
+                    <h2 class="h2">{{ video.title}}</h2>
+                    <img ng-src="{{ video.image}}"></img>
+                    <p > <span class="views"> Просмотры: </span> {{ video.views | number}}</p>
+                    <p> <span class="descr"> Описание: </span> {{ video.descript | limitTo:150 }}</p>
+                    <button  ng-show="video.isF" class="btn btn-info text-right">Добавить в избранное</button>
+                </div>
+        </div>
+
+        <div class="row">
+             <div   class="col-md-6 block inline-block"  ng-show="last.tab==2" ng-repeat="video in last.favorites| orderBy: 'views'" >
+                 <h2 class="h2">{{ video.title}}</h2>
+                 <img ng-src="{{ video.image}}"></img>
+                 <p> <span class="views">Просмотры: </span>{{ video.views | number}}</p>
+                 <p> <span class="descr"> Описание: </span>{{ video.descript | limitTo:50 }}</p>
+                 <button ng-show="video.isF" class="btn btn-info ">Убрать</button>
+             </div>
+        </div>
+
+    </div>
+    </div>
+
+
+        <footer class="footer">
+            <p class="footer-text"> Изучение Angular на практике. Задание Заславской Анастасии. 28/11/16 </p>
+
+        </footer>
 </div>
 
-
-    <div ng-if="last.tab==1"  ng-repeat="video in last.videos | orderBy: 'views'">
-        <img ng-src="{{ video.image}}"></img>
-
-        <i ng-show="video.e">E</i>
-        <strong> {{ video.views | number}}</strong>
-        <p> {{ video.descript | limitTo:10 | uppercase}}</p>
-        <button ng-hide="video.isF" class="btn ">Add to favorit</button>
-    </div>
-    <div  ng-show="last.tab==2" ng-repeat="video in last.favorites| orderBy: 'views'"    >
-        <h2>{{ video.title}}</h2>
-        <i ng-show="video.e">E</i>
-        <strong> {{ video.views | number}}</strong>
-        <p> {{ video.descript | limitTo:10 | uppercase}}</p>
-        <button ng-show="video.isF" class="btn ">remove</button>
-    </div>
-</div>
 
 
 
