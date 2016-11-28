@@ -1,3 +1,3 @@
-# angular_start YouTube app
+# YouTube app
 ## Задание для изчение Angular
 #### 
