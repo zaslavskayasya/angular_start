@@ -10,7 +10,17 @@ body {
     min-height: 800px;
 
 }
+.form {
+    padding: 20px;
+    margin-top: 40px ;
+    width: 50%;
+    text-align: center;
+    margin-left: 20%;
+}
+.nav {
 
+
+}
 .h1 {
   padding: 55px;
     color: aliceblue;
